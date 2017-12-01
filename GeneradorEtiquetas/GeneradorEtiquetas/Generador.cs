@@ -19,12 +19,13 @@ namespace GeneradorEtiquetas
 		static Word._Application AplicacionWord;
 		static Word._Document Documento;
 		public List<Modelo> ITEMS = new List<Modelo>();
+		private Modelo modelo;
 
-		public void Eliminar(string itemEsp)
+		public void Eliminar(string itemSel)
 		{
 			foreach(var item in ITEMS)
 			{
-				if (item.Item == itemEsp)
+				if (item.Item == itemSel)
 				{
 					ITEMS.Remove(item);
 					break;
@@ -34,10 +35,19 @@ namespace GeneradorEtiquetas
 
 		public void ElimiarITEMS()
 		{
+			ITEMS.Clear();
+		}
+
+		public Modelo DetalleModelo(string itemSel)
+		{
 			foreach(var item in ITEMS)
 			{
-				ITEMS.Remove(item);
+				if (item.Item == itemSel)
+				{
+					modelo = item;
+				}
 			}
+			return modelo;
 		}
 
 		public void EtiquetaPrecio()
@@ -62,7 +72,6 @@ namespace GeneradorEtiquetas
 				{
 					try
 					{
-
 						oTable.Cell(r, c).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
 						oTable.Cell(r, c).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 						oTable.Cell(r, c).Range.Text = $"Style number {ITEMS[i].Item}\n${ITEMS[i].Price:0.00} pk/ {ITEMS[i].Pack}";
@@ -70,14 +79,13 @@ namespace GeneradorEtiquetas
 						oTable.Cell(r, c).Range.Font.Bold = 1;
 						oTable.Cell(r, c).Range.Font.Italic = 2;
 						oTable.Cell(r, c).Range.Font.Name = "Adobe Caslon Pro";
+						oTable.Columns[c].Width = AplicacionWord.CentimetersToPoints(7);
 						i++;
 					}
 					catch (Exception)
 					{
-						c = 3;
-						r = 10;
+
 					}
-					oTable.Columns[c].Width = AplicacionWord.CentimetersToPoints(7);
 				}
 				oTable.Rows[r].Height = AplicacionWord.InchesToPoints(1);
 			}
@@ -100,26 +108,24 @@ namespace GeneradorEtiquetas
 			int i = 0;
 			for (int r = 1; r <= 10; r++)
 			{
-				for (int c = 1; c <= 3; c++)
+				for (int c = 1; c <=3; c++)
 				{
 
 					try
 					{
-
 						oTable.Cell(r, c).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
 						oTable.Cell(r, c).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 						oTable.Cell(r, c).Range.Text = $"{ITEMS[i].Collection}\n{ITEMS[i].Item}";
 						oTable.Cell(r, c).Range.Font.Size = 20;
 						oTable.Cell(r, c).Range.Font.Bold = 1;
 						oTable.Cell(r, c).Range.Font.Name = "Arial";
+						oTable.Columns[c].Width = AplicacionWord.CentimetersToPoints(7);
 						i++;
 					}
 					catch (Exception)
 					{
-						c = 3;
-						r = 10;
+
 					}
-					oTable.Columns[c].Width = AplicacionWord.CentimetersToPoints(7);
 				}
 				oTable.Rows[r].Height = AplicacionWord.InchesToPoints(1);
 			}

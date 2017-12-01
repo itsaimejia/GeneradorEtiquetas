@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.rb1 = new System.Windows.Forms.RadioButton();
@@ -42,13 +43,14 @@
 			this.txtPrice = new System.Windows.Forms.TextBox();
 			this.txtItem = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.btnSalir = new System.Windows.Forms.Button();
 			this.btnGenEtiquetas = new System.Windows.Forms.Button();
 			this.btnGuardar = new System.Windows.Forms.Button();
 			this.btnLimpiar = new System.Windows.Forms.Button();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.btnEliminarTodo = new System.Windows.Forms.Button();
 			this.btnBorrarItem = new System.Windows.Forms.Button();
 			this.lbItems = new System.Windows.Forms.ListBox();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -206,7 +208,6 @@
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.btnSalir);
 			this.groupBox2.Controls.Add(this.btnGenEtiquetas);
 			this.groupBox2.Controls.Add(this.btnGuardar);
 			this.groupBox2.Controls.Add(this.btnLimpiar);
@@ -218,21 +219,9 @@
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Acciones";
 			// 
-			// btnSalir
-			// 
-			this.btnSalir.BackColor = System.Drawing.Color.Red;
-			this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnSalir.Location = new System.Drawing.Point(6, 31);
-			this.btnSalir.Name = "btnSalir";
-			this.btnSalir.Size = new System.Drawing.Size(88, 34);
-			this.btnSalir.TabIndex = 12;
-			this.btnSalir.TabStop = false;
-			this.btnSalir.Text = "Salir";
-			this.btnSalir.UseVisualStyleBackColor = false;
-			this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-			// 
 			// btnGenEtiquetas
 			// 
+			this.btnGenEtiquetas.Enabled = false;
 			this.btnGenEtiquetas.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnGenEtiquetas.Location = new System.Drawing.Point(613, 21);
 			this.btnGenEtiquetas.Name = "btnGenEtiquetas";
@@ -266,6 +255,7 @@
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.btnEliminarTodo);
 			this.groupBox4.Controls.Add(this.btnBorrarItem);
 			this.groupBox4.Controls.Add(this.lbItems);
 			this.groupBox4.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -277,13 +267,27 @@
 			this.groupBox4.Text = "ITEMs guardados";
 			this.groupBox4.Leave += new System.EventHandler(this.groupBox4_Leave);
 			// 
+			// btnEliminarTodo
+			// 
+			this.btnEliminarTodo.Enabled = false;
+			this.btnEliminarTodo.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnEliminarTodo.Location = new System.Drawing.Point(103, 293);
+			this.btnEliminarTodo.Name = "btnEliminarTodo";
+			this.btnEliminarTodo.Size = new System.Drawing.Size(98, 53);
+			this.btnEliminarTodo.TabIndex = 2;
+			this.btnEliminarTodo.TabStop = false;
+			this.btnEliminarTodo.Tag = "sdsadasd";
+			this.btnEliminarTodo.Text = "Eliminar etiquetas";
+			this.btnEliminarTodo.UseVisualStyleBackColor = true;
+			this.btnEliminarTodo.Click += new System.EventHandler(this.btnEliminarTodo_Click);
+			// 
 			// btnBorrarItem
 			// 
 			this.btnBorrarItem.Enabled = false;
 			this.btnBorrarItem.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnBorrarItem.Location = new System.Drawing.Point(41, 305);
+			this.btnBorrarItem.Location = new System.Drawing.Point(15, 293);
 			this.btnBorrarItem.Name = "btnBorrarItem";
-			this.btnBorrarItem.Size = new System.Drawing.Size(124, 35);
+			this.btnBorrarItem.Size = new System.Drawing.Size(82, 53);
 			this.btnBorrarItem.TabIndex = 1;
 			this.btnBorrarItem.Text = "Eliminar item";
 			this.btnBorrarItem.UseVisualStyleBackColor = true;
@@ -295,25 +299,30 @@
 			this.lbItems.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lbItems.FormattingEnabled = true;
 			this.lbItems.ItemHeight = 18;
-			this.lbItems.Location = new System.Drawing.Point(15, 29);
+			this.lbItems.Location = new System.Drawing.Point(15, 31);
 			this.lbItems.Name = "lbItems";
 			this.lbItems.Size = new System.Drawing.Size(186, 256);
 			this.lbItems.TabIndex = 0;
+			this.lbItems.TabStop = false;
+			this.toolTip1.SetToolTip(this.lbItems, "Da doble click sobre el item para ver sus detalles");
+			this.lbItems.UseTabStops = false;
 			this.lbItems.SelectedIndexChanged += new System.EventHandler(this.lbItems_SelectedIndexChanged);
+			this.lbItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbItems_MouseDoubleClick);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(809, 505);
-			this.ControlBox = false;
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.MaximizeBox = false;
 			this.Name = "Form1";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Generar etiquetas";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -343,11 +352,12 @@
 		private System.Windows.Forms.Button btnGenEtiquetas;
 		private System.Windows.Forms.Button btnGuardar;
 		private System.Windows.Forms.Button btnLimpiar;
-		private System.Windows.Forms.Button btnSalir;
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.ListBox lbItems;
 		private System.Windows.Forms.Button btnBorrarItem;
 		private System.Windows.Forms.RadioButton rb1;
+		private System.Windows.Forms.Button btnEliminarTodo;
+		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }
 

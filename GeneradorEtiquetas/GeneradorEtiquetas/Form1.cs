@@ -21,7 +21,6 @@ namespace GeneradorEtiquetas
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			
 		}
 
 
@@ -29,6 +28,8 @@ namespace GeneradorEtiquetas
 		private void btnGuardar_Click(object sender, EventArgs e)
 		{
 			Guardar();
+			cbCollection.Focus();
+			
 		}
 
 		private void btnLimpiar_Click(object sender, EventArgs e)
@@ -38,19 +39,22 @@ namespace GeneradorEtiquetas
 
 		private void btnBorrarItem_Click(object sender, EventArgs e)
 		{
-
-			if (lbItems.SelectedIndex == -1)
+			
+			if (lbItems.SelectedIndex != -1)
 			{
-				btnBorrarItem.Enabled = false;
-
+				DialogResult result = MessageBox.Show("¿Quieres eliminar este item?", "Alerta", MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+				if (result == DialogResult.Yes)
+				{
+					string ItemSel = lbItems.SelectedItem.ToString();
+					lbItems.Items.Remove(ItemSel);
+					Generador.Eliminar(ItemSel);
+					MessageBox.Show("Ha sido borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					lbItems.SelectedIndex = -1;
+					btnBorrarItem.Enabled = false;
+				}
 			}
 			else
 			{
-				string ItemSel = lbItems.SelectedItem.ToString();
-				lbItems.Items.Remove(ItemSel);
-				Generador.Eliminar(ItemSel);
-				MessageBox.Show("Ha sido borrado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				lbItems.SelectedIndex = -1;
 				btnBorrarItem.Enabled = false;
 			}
 		}
@@ -122,16 +126,17 @@ namespace GeneradorEtiquetas
 				txtItem.Focus();
 			}
 			else
+			if (!(rb1.Checked || rb2.Checked || rb3.Checked || rb6.Checked || rb8.Checked))
+			{
+				MessageBox.Show("Selecciona un paquete");
+				groupBox3.Focus();
+			}
+			else
+			
 			if (string.IsNullOrEmpty(txtPrice.Text))
 			{
 				MessageBox.Show("Ingresa el precio");
 				txtPrice.Focus();
-			}
-			else
-			if (!(rb1.Checked || rb2.Checked || rb3.Checked || rb6.Checked || rb8.Checked))
-			{ 
-				MessageBox.Show("Selecciona un paquete");
-				groupBox3.Focus();
 			}
 			else
 			{
@@ -143,8 +148,10 @@ namespace GeneradorEtiquetas
 					Price = double.Parse(txtPrice.Text)
 				};
 				Generador.ITEMS.Add(NuevoItem);
-				lbItems.Items.Add(NuevoItem.Item);
+				lbItems.Items.Add(txtItem.Text);
 				MessageBox.Show("Item guardado");
+				btnEliminarTodo.Enabled = true;
+				btnGenEtiquetas.Enabled = true;
 				Limpiar();
 			}
 		}
@@ -165,10 +172,39 @@ namespace GeneradorEtiquetas
 		}
 
 
-		#endregion
 
 		#endregion
 
-		
+		#endregion
+
+		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+		{
+
+			DialogResult result = MessageBox.Show("¿Deseas salir?", "Alerta", MessageBoxButtons.YesNo);
+			if (result == DialogResult.No)
+			{
+				e.Cancel = true;
+			}
+		}
+
+		private void lbItems_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			string ItemSel = lbItems.SelectedItem.ToString();
+			Modelo modelo = Generador.DetalleModelo(ItemSel);
+			string descripcion = $"Colección: {modelo.Collection}\nITEM: {modelo.Item}\nPack: {modelo.Pack}\nPrecio: {modelo.Price}";
+			MessageBox.Show(descripcion, "Detalles");
+		}
+
+		private void btnEliminarTodo_Click(object sender, EventArgs e)
+		{
+			DialogResult result = MessageBox.Show("¿Quieres eliminar todo?", "¡Quieto ahí!", MessageBoxButtons.YesNo);
+			if (result == DialogResult.Yes)
+			{
+				Generador.ElimiarITEMS();
+				lbItems.Items.Clear();
+				btnEliminarTodo.Enabled = false;
+				btnGenEtiquetas.Enabled = false;
+			}
+		}
 	}
 }
