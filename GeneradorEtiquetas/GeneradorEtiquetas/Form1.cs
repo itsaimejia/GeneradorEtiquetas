@@ -28,7 +28,7 @@ namespace GeneradorEtiquetas
 		private void btnGuardar_Click(object sender, EventArgs e)
 		{
 			Guardar();
-			cbCollection.Focus();
+			
 			
 		}
 
@@ -90,11 +90,16 @@ namespace GeneradorEtiquetas
 		private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
 		{
 
-			if (!(char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)Keys.Back) && (e.KeyChar != 46))
+			if (!(char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)Keys.Back) && (e.KeyChar != 46) && (e.KeyChar != (char)Keys.Enter))
 			{
 				txtPrice.Text = string.Empty;
 				e.Handled = true;
 				return;
+			}
+			else
+			if (e.KeyChar == (char)Keys.Enter)
+			{
+				Guardar();
 			}
 		}
 
@@ -126,10 +131,10 @@ namespace GeneradorEtiquetas
 				txtItem.Focus();
 			}
 			else
-			if (!(rb1.Checked || rb2.Checked || rb3.Checked || rb6.Checked || rb8.Checked))
+			if (cbPack.SelectedIndex.Equals(-1))
 			{
 				MessageBox.Show("Selecciona un paquete");
-				groupBox3.Focus();
+				cbPack.Focus();
 			}
 			else
 			
@@ -140,18 +145,20 @@ namespace GeneradorEtiquetas
 			}
 			else
 			{
+				var itemTemp = txtItem.Text.ToUpper();
 				Modelo NuevoItem = new Modelo
 				{
 					Collection = cbCollection.Text,
-					Item = txtItem.Text,
-					Pack = (rb1.Checked) ? rb1.Text : (rb2.Checked) ? rb2.Text : (rb3.Checked) ? rb3.Text : (rb6.Checked) ? rb6.Text : rb8.Text,
+					Item = itemTemp,
+					Pack = cbPack.Text,
 					Price = double.Parse(txtPrice.Text)
 				};
 				Generador.ITEMS.Add(NuevoItem);
-				lbItems.Items.Add(txtItem.Text);
+				lbItems.Items.Add(itemTemp);
 				MessageBox.Show("Item guardado");
 				btnEliminarTodo.Enabled = true;
 				btnGenEtiquetas.Enabled = true;
+				cbCollection.Focus();
 				Limpiar();
 			}
 		}
@@ -163,11 +170,7 @@ namespace GeneradorEtiquetas
 			txtItem.Text = string.Empty;
 			txtPrice.Text = string.Empty;
 			cbCollection.SelectedIndex = -1;
-			rb1.Checked = false;
-			rb2.Checked = false;
-			rb3.Checked = false;
-			rb6.Checked = false;
-			rb8.Checked = false;
+			cbPack.SelectedIndex = -1;
 
 		}
 
@@ -179,7 +182,6 @@ namespace GeneradorEtiquetas
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-
 			DialogResult result = MessageBox.Show("¿Deseas salir?", "Alerta", MessageBoxButtons.YesNo);
 			if (result == DialogResult.No)
 			{

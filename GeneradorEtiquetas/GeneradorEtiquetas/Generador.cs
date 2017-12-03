@@ -45,6 +45,7 @@ namespace GeneradorEtiquetas
 				if (item.Item == itemSel)
 				{
 					modelo = item;
+					break;
 				}
 			}
 			return modelo;

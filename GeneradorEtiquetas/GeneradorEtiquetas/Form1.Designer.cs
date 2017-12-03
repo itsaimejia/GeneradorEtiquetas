@@ -30,12 +30,6 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.rb1 = new System.Windows.Forms.RadioButton();
-			this.rb8 = new System.Windows.Forms.RadioButton();
-			this.rb6 = new System.Windows.Forms.RadioButton();
-			this.rb3 = new System.Windows.Forms.RadioButton();
-			this.rb2 = new System.Windows.Forms.RadioButton();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
@@ -51,15 +45,17 @@
 			this.btnBorrarItem = new System.Windows.Forms.Button();
 			this.lbItems = new System.Windows.Forms.ListBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.label4 = new System.Windows.Forms.Label();
+			this.cbPack = new System.Windows.Forms.ComboBox();
 			this.groupBox1.SuspendLayout();
-			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.groupBox3);
+			this.groupBox1.Controls.Add(this.cbPack);
+			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.label1);
@@ -73,76 +69,6 @@
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Datos";
-			// 
-			// groupBox3
-			// 
-			this.groupBox3.Controls.Add(this.rb1);
-			this.groupBox3.Controls.Add(this.rb8);
-			this.groupBox3.Controls.Add(this.rb6);
-			this.groupBox3.Controls.Add(this.rb3);
-			this.groupBox3.Controls.Add(this.rb2);
-			this.groupBox3.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.groupBox3.Location = new System.Drawing.Point(37, 159);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(353, 66);
-			this.groupBox3.TabIndex = 2;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "PACK";
-			// 
-			// rb1
-			// 
-			this.rb1.AutoSize = true;
-			this.rb1.Location = new System.Drawing.Point(6, 31);
-			this.rb1.Name = "rb1";
-			this.rb1.Size = new System.Drawing.Size(40, 28);
-			this.rb1.TabIndex = 6;
-			this.rb1.TabStop = true;
-			this.rb1.Text = "1";
-			this.rb1.UseVisualStyleBackColor = true;
-			// 
-			// rb8
-			// 
-			this.rb8.AutoSize = true;
-			this.rb8.Location = new System.Drawing.Point(304, 31);
-			this.rb8.Name = "rb8";
-			this.rb8.Size = new System.Drawing.Size(40, 28);
-			this.rb8.TabIndex = 5;
-			this.rb8.TabStop = true;
-			this.rb8.Text = "8";
-			this.rb8.UseVisualStyleBackColor = true;
-			// 
-			// rb6
-			// 
-			this.rb6.AutoSize = true;
-			this.rb6.Location = new System.Drawing.Point(227, 31);
-			this.rb6.Name = "rb6";
-			this.rb6.Size = new System.Drawing.Size(40, 28);
-			this.rb6.TabIndex = 4;
-			this.rb6.TabStop = true;
-			this.rb6.Text = "6";
-			this.rb6.UseVisualStyleBackColor = true;
-			// 
-			// rb3
-			// 
-			this.rb3.AutoSize = true;
-			this.rb3.Location = new System.Drawing.Point(146, 31);
-			this.rb3.Name = "rb3";
-			this.rb3.Size = new System.Drawing.Size(40, 28);
-			this.rb3.TabIndex = 3;
-			this.rb3.TabStop = true;
-			this.rb3.Text = "3";
-			this.rb3.UseVisualStyleBackColor = true;
-			// 
-			// rb2
-			// 
-			this.rb2.AutoSize = true;
-			this.rb2.Location = new System.Drawing.Point(72, 31);
-			this.rb2.Name = "rb2";
-			this.rb2.Size = new System.Drawing.Size(40, 28);
-			this.rb2.TabIndex = 2;
-			this.rb2.TabStop = true;
-			this.rb2.Text = "2";
-			this.rb2.UseVisualStyleBackColor = true;
 			// 
 			// label3
 			// 
@@ -158,7 +84,7 @@
 			// 
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(62, 100);
+			this.label2.Location = new System.Drawing.Point(62, 132);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(61, 22);
 			this.label2.TabIndex = 4;
@@ -168,7 +94,7 @@
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(23, 41);
+			this.label1.Location = new System.Drawing.Point(23, 62);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(100, 22);
 			this.label1.TabIndex = 3;
@@ -181,10 +107,11 @@
 			this.cbCollection.FormattingEnabled = true;
 			this.cbCollection.Items.AddRange(new object[] {
             "FALL",
-            "SPRING",
             "HOLIDAY",
+            "SUMMER",
+            "SPRING",
             "WEEDING"});
-			this.cbCollection.Location = new System.Drawing.Point(144, 31);
+			this.cbCollection.Location = new System.Drawing.Point(144, 52);
 			this.cbCollection.Name = "cbCollection";
 			this.cbCollection.Size = new System.Drawing.Size(246, 32);
 			this.cbCollection.TabIndex = 0;
@@ -195,13 +122,13 @@
 			this.txtPrice.Location = new System.Drawing.Point(144, 272);
 			this.txtPrice.Name = "txtPrice";
 			this.txtPrice.Size = new System.Drawing.Size(246, 32);
-			this.txtPrice.TabIndex = 6;
+			this.txtPrice.TabIndex = 3;
 			this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
 			// 
 			// txtItem
 			// 
 			this.txtItem.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.txtItem.Location = new System.Drawing.Point(144, 90);
+			this.txtItem.Location = new System.Drawing.Point(144, 122);
 			this.txtItem.Name = "txtItem";
 			this.txtItem.Size = new System.Drawing.Size(246, 32);
 			this.txtItem.TabIndex = 1;
@@ -237,7 +164,7 @@
 			this.btnGuardar.Location = new System.Drawing.Point(257, 31);
 			this.btnGuardar.Name = "btnGuardar";
 			this.btnGuardar.Size = new System.Drawing.Size(106, 34);
-			this.btnGuardar.TabIndex = 7;
+			this.btnGuardar.TabIndex = 4;
 			this.btnGuardar.Text = "Guardar";
 			this.btnGuardar.UseVisualStyleBackColor = true;
 			this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -289,6 +216,7 @@
 			this.btnBorrarItem.Name = "btnBorrarItem";
 			this.btnBorrarItem.Size = new System.Drawing.Size(82, 53);
 			this.btnBorrarItem.TabIndex = 1;
+			this.btnBorrarItem.TabStop = false;
 			this.btnBorrarItem.Text = "Eliminar item";
 			this.btnBorrarItem.UseVisualStyleBackColor = true;
 			this.btnBorrarItem.Click += new System.EventHandler(this.btnBorrarItem_Click);
@@ -309,6 +237,34 @@
 			this.lbItems.SelectedIndexChanged += new System.EventHandler(this.lbItems_SelectedIndexChanged);
 			this.lbItems.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbItems_MouseDoubleClick);
 			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(62, 202);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(67, 22);
+			this.label4.TabIndex = 7;
+			this.label4.Text = "PACK:";
+			// 
+			// cbPack
+			// 
+			this.cbPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbPack.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cbPack.FormattingEnabled = true;
+			this.cbPack.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8"});
+			this.cbPack.Location = new System.Drawing.Point(144, 192);
+			this.cbPack.Name = "cbPack";
+			this.cbPack.Size = new System.Drawing.Size(246, 32);
+			this.cbPack.TabIndex = 2;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,8 +282,6 @@
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			this.groupBox3.ResumeLayout(false);
-			this.groupBox3.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox4.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -341,11 +295,6 @@
 		private System.Windows.Forms.TextBox txtPrice;
 		private System.Windows.Forms.TextBox txtItem;
 		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.GroupBox groupBox3;
-		private System.Windows.Forms.RadioButton rb8;
-		private System.Windows.Forms.RadioButton rb6;
-		private System.Windows.Forms.RadioButton rb3;
-		private System.Windows.Forms.RadioButton rb2;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
@@ -355,9 +304,10 @@
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.ListBox lbItems;
 		private System.Windows.Forms.Button btnBorrarItem;
-		private System.Windows.Forms.RadioButton rb1;
 		private System.Windows.Forms.Button btnEliminarTodo;
 		private System.Windows.Forms.ToolTip toolTip1;
+		private System.Windows.Forms.ComboBox cbPack;
+		private System.Windows.Forms.Label label4;
 	}
 }
 
